@@ -1,26 +1,26 @@
-/* ÈÎÎñÒ»µÄÀí½â£ºÖ÷ÒªÊÇÕë¶Ôblob¶ÔÏó
-@1. ¸ø¶¨value£¬Ïò´æ´¢ÖĞÌí¼Ó¶ÔÓ¦µÄkey-value
-	step1 ÔÚ¹¤×÷ÇøĞÂ½¨Ò»¸öfile¶ÔÏó£¬²¢Ğ´ÈëÎÄ¼şÄÚÈİ£¨¿ØÖÆÌ¨ÊäÈë¡¢»òÕßÊÇĞ´ÈëÒ»¸öÒÑÓĞµÄÎÄ¼ş£©
-	step2 ÎªÕâ¸öfile¶ÔÏóÖØÃüÃûÎª¡¶ÎÄ¼şµÄhashÖµ¡·²¢±£´æ
+/* ä»»åŠ¡ä¸€çš„ç†è§£ï¼šä¸»è¦æ˜¯é’ˆå¯¹blobå¯¹è±¡
+@1. ç»™å®švalueï¼Œå‘å­˜å‚¨ä¸­æ·»åŠ å¯¹åº”çš„key-value
+	step1 åœ¨å·¥ä½œåŒºæ–°å»ºä¸€ä¸ªfileå¯¹è±¡ï¼Œå¹¶å†™å…¥æ–‡ä»¶å†…å®¹ï¼ˆæ§åˆ¶å°è¾“å…¥ã€æˆ–è€…æ˜¯å†™å…¥ä¸€ä¸ªå·²æœ‰çš„æ–‡ä»¶ï¼‰
+	step2 ä¸ºè¿™ä¸ªfileå¯¹è±¡é‡å‘½åä¸ºã€Šæ–‡ä»¶çš„hashå€¼ã€‹å¹¶ä¿å­˜
 
-@2. ¸ø¶¨key£¬²éÕÒµÃµ½¶ÔÓ¦µÄvalueÖµ
-	Èç¹û¶ÁÈ¡¡¶ÎÄ¼şµÄhashÖµ¡·¾Í¿ÉÒÔµÃµ½ÎÄ¼şÄÚÈİ£¬´ËÊ±¡¶ÎÄ¼şµÄhashÖµ¡·¾ÍÊÇkey£¬ÎÄ¼şÄÚÈİ¾ÍÊÇvalue¡£
+@2. ç»™å®škeyï¼ŒæŸ¥æ‰¾å¾—åˆ°å¯¹åº”çš„valueå€¼
+	å¦‚æœè¯»å–ã€Šæ–‡ä»¶çš„hashå€¼ã€‹å°±å¯ä»¥å¾—åˆ°æ–‡ä»¶å†…å®¹ï¼Œæ­¤æ—¶ã€Šæ–‡ä»¶çš„hashå€¼ã€‹å°±æ˜¯keyï¼Œæ–‡ä»¶å†…å®¹å°±æ˜¯valueã€‚
 */
 package gitcontroltool;
 import java.io.*;
-// ·â×°BlobÀà£¬ÀàÖĞÊôĞÔ°üº¬blob¶ÔÏóµÄÃû×Ö£¬Ò»¸öÊäÈëÁ÷±äÁ¿£¨ÓÃÀ´¶ÁÈ¡¾ßÌåµÄÎÄ¼şÄÚÈİ£©
+// å°è£…Blobç±»ï¼Œç±»ä¸­å±æ€§åŒ…å«blobå¯¹è±¡çš„åå­—ï¼Œä¸€ä¸ªè¾“å…¥æµå˜é‡ï¼ˆç”¨æ¥è¯»å–å…·ä½“çš„æ–‡ä»¶å†…å®¹ï¼‰
 public class Blob {
-    private String name; // blob¶ÔÏóµÄÃû×Ö
-    FileInputStream input; // ÊäÈëÁ÷±äÁ¿
-    public Blob(String filename) throws Exception { // blob¶ÔÏóµÄ¹¹Ôì·½·¨£¬Ô­ÓĞÎÄ¼şÄÚÈİ²»±ä£¬Éú³ÉÒ»¸öÎÄ¼şÃûÎªhash£¨origin's value£©µÄblob¶ÔÏó
-    	Hash s = new Hash(filename,true); // step1.´«ÈëÒ»¸öÒÑÓĞµÄ¾ßÌåÎÄ¼ş£¬ÏÈÉú³É¶ÔÓ¦µÄhashÖµ
-        this.name = s.getSha(); // step2.Îªµ±Ç°blob¶ÔÏó¸³ÓèhashÖµ×öÃû×Ö
-        this.input = new FileInputStream(filename); // step3.ÊäÈëÁ÷±äÁ¿ÒıÓÃÓÉµ±Ç°´«ÈëµÄ¾ßÌåÎÄ¼şÉú³ÉµÄfile¶ÔÏóÊµÀı£¬ÕâÒ»²½Ö»ÄÜÔÚ¹¹Ôì·½·¨º¯ÊıÄÚÊµÏÖ
+    private String name; // blobå¯¹è±¡çš„åå­—
+    FileInputStream input; // è¾“å…¥æµå˜é‡
+    public Blob(String filename) throws Exception { // blobå¯¹è±¡çš„æ„é€ æ–¹æ³•ï¼ŒåŸæœ‰æ–‡ä»¶å†…å®¹ä¸å˜ï¼Œç”Ÿæˆä¸€ä¸ªæ–‡ä»¶åä¸ºhashï¼ˆorigin's valueï¼‰çš„blobå¯¹è±¡
+    	Hash s = new Hash(filename,true); // step1.ä¼ å…¥ä¸€ä¸ªå·²æœ‰çš„å…·ä½“æ–‡ä»¶ï¼Œå…ˆç”Ÿæˆå¯¹åº”çš„hashå€¼
+        this.name = s.getSha(); // step2.ä¸ºå½“å‰blobå¯¹è±¡èµ‹äºˆhashå€¼åšåå­—
+        this.input = new FileInputStream(filename); // step3.è¾“å…¥æµå˜é‡å¼•ç”¨ç”±å½“å‰ä¼ å…¥çš„å…·ä½“æ–‡ä»¶ç”Ÿæˆçš„fileå¯¹è±¡å®ä¾‹ï¼Œè¿™ä¸€æ­¥åªèƒ½åœ¨æ„é€ æ–¹æ³•å‡½æ•°å†…å®ç°
     } 
 
-    public void createBlob() throws IOException { // Ğ´Èë´«ÈëÎÄ¼şµÄÄÚÈİ£¬Ğ´ÈëºóÓÃblob¶ÔÏóµÄÃû×Ö±£´æ¡£
-        FileOutputStream output = new FileOutputStream(this.name); // ÎÄ¼ş²»´æÔÚ»á×Ô¶¯´´½¨
-        byte[] buffer = new byte[1024]; // ÀûÓÃ×Ö·ûÊı×é×ö»º³åÆ÷£¬ÌáÉı¶ÁĞ´ËÙ¶È¡£
+    public void createBlob() throws IOException { // å†™å…¥ä¼ å…¥æ–‡ä»¶çš„å†…å®¹ï¼Œå†™å…¥åç”¨blobå¯¹è±¡çš„åå­—ä¿å­˜ã€‚
+        FileOutputStream output = new FileOutputStream(this.name); // æ–‡ä»¶ä¸å­˜åœ¨ä¼šè‡ªåŠ¨åˆ›å»º
+        byte[] buffer = new byte[1024]; // åˆ©ç”¨å­—ç¬¦æ•°ç»„åšç¼“å†²å™¨ï¼Œæå‡è¯»å†™é€Ÿåº¦ã€‚
         int numRead = 0;
         do {
             numRead = input.read(buffer);
@@ -32,13 +32,14 @@ public class Blob {
         output.close();
     }
     
-    public String getkey() { // Ğ´Èë´«ÈëÎÄ¼şµÄÄÚÈİ£¬Ğ´ÈëºóÓÃblob¶ÔÏóµÄÃû×Ö±£´æ¡£
+    public String getkey() { // å†™å…¥ä¼ å…¥æ–‡ä»¶çš„å†…å®¹ï¼Œå†™å…¥åç”¨blobå¯¹è±¡çš„åå­—ä¿å­˜ã€‚
     	String key = this.name;
     	return key;
     }
 
+	
     @Override
-    public String toString() { // ÖØĞ´objectµÄtostring·½·¨¡£
+    public String toString() { // é‡å†™objectçš„tostringæ–¹æ³•ã€‚
         return "blob " + name;
     }
 }
