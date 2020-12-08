@@ -1,12 +1,13 @@
 package gitcontroltool;
 import java.io.*;
-// µ¥Ôª²âÊÔÀà²âÊÔ×îÖÕĞ§¹û
-// ¼´¸ø¶¨Ò»¸öÎÄ¼şÄÚÈİ£¬Ïò´æ´¢ÖĞÌí¼Ó¶ÔÓ¦µÄkey-value£»¸ø¶¨key£¬²éÕÒµÃµ½¶ÔÓ¦µÄvalueÖµ
+// å•å…ƒæµ‹è¯•ç±»æµ‹è¯•æœ€ç»ˆæ•ˆæœ
+// å³ç»™å®šä¸€ä¸ªæ–‡ä»¶å†…å®¹ï¼Œå‘å­˜å‚¨ä¸­æ·»åŠ å¯¹åº”çš„key-valueï¼›ç»™å®škeyï¼ŒæŸ¥æ‰¾å¾—åˆ°å¯¹åº”çš„valueå€¼
+
 
 public class Test { 
 
-    public static void testValid(String filename){ // testvalidº¯Êı²âÊÔÊÇ·ñ¿ÉÒÔÉú³ÉÒ»¸öÒÔhash£¨value£©¼´keyÖµÎªÎÄ¼şÃûµÄĞÂÎÄ¼ş
-// ´«ÈëÒ»¸ö¾ßÌåµÄoriginÎÄ¼şÃû³Æ£¬Éú³ÉÒ»¸öhash£¨origin¡®s value£©×öÃû×ÖµÄĞÂÎÄ¼ş£¬ÎÄ¼şÄÚÈİÍ¬origin¡£
+    public static void testValid(String filename){ // testvalidå‡½æ•°æµ‹è¯•æ˜¯å¦å¯ä»¥ç”Ÿæˆä¸€ä¸ªä»¥hashï¼ˆvalueï¼‰å³keyå€¼ä¸ºæ–‡ä»¶åçš„æ–°æ–‡ä»¶
+// ä¼ å…¥ä¸€ä¸ªå…·ä½“çš„originæ–‡ä»¶åç§°ï¼Œç”Ÿæˆä¸€ä¸ªhashï¼ˆoriginâ€˜s valueï¼‰åšåå­—çš„æ–°æ–‡ä»¶ï¼Œæ–‡ä»¶å†…å®¹åŒoriginã€‚
         File file = new File(filename);
         try{
         	Blob blob = new Blob(file.getAbsolutePath());
@@ -14,12 +15,12 @@ public class Test {
 			System.out.println(blob);
         }
         catch (Exception ex){
-            ex.printStackTrace(); // ÔÚÃüÁîĞĞ´òÓ¡Òì³£ĞÅÏ¢ÔÚ³ÌĞòÖĞ³ö´íµÄÎ»ÖÃ¼°Ô­Òò
+            ex.printStackTrace(); // åœ¨å‘½ä»¤è¡Œæ‰“å°å¼‚å¸¸ä¿¡æ¯åœ¨ç¨‹åºä¸­å‡ºé”™çš„ä½ç½®åŠåŸå› 
         }
     }
 
     public static void getValue(String path, String encoding) throws IOException { 
-    	// ¸ù¾İtestValid()·½·¨Éú³ÉµÄkeyÖµÎªÎÄ¼şÃûµÄÎÄ¼ş£¬ÏÖÔÚÓÃgetValue·½·¨È¥µÃµ½¶ÔÓ¦µÄvalue
+    	// æ ¹æ®testValid()æ–¹æ³•ç”Ÿæˆçš„keyå€¼ä¸ºæ–‡ä»¶åçš„æ–‡ä»¶ï¼Œç°åœ¨ç”¨getValueæ–¹æ³•å»å¾—åˆ°å¯¹åº”çš„value
         String content = "";
         File file = new File(path);
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
