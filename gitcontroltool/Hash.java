@@ -1,49 +1,50 @@
 package gitcontroltool;
 import java.io.*;
-import java.security.MessageDigest; // µ¼ÈëÏûÏ¢ÕªÒª£¬Ìá¹©ĞÅÏ¢ÕªÒªSHA1Ëã·¨
+import java.security.MessageDigest; // å¯¼å…¥æ¶ˆæ¯æ‘˜è¦ï¼Œæä¾›ä¿¡æ¯æ‘˜è¦SHA1ç®—æ³•
+
 
 public class Hash { 
-// ½«shaÖµµÄ¼ÆËã·â×°ÎªÒ»¸öÀà£¬¸ÃÀàÖĞÓĞ³ÉÔ±ÊôĞÔsha1£¨³õÊ¼shaÖµ£©ºÍoutFile£¨×îÖÕ×ªÎª16½øÖÆµÄ×Ö·û´®£©
-// Ìá¹©»ùÓÚÎÄ¼şÄÚÈİ£¨blob£©ºÍÎÄ¼şÃû»ò×Ö·û´®£¨Õë¶Ôtree£©µÄshaÖµ¼ÆËãºÍ¶ÁÈ¡·½·¨¡¢Ìá¹©×Ö·ûÊı×é×ª×Ö·û´®µÄ·½·¨
+// å°†shaå€¼çš„è®¡ç®—å°è£…ä¸ºä¸€ä¸ªç±»ï¼Œè¯¥ç±»ä¸­æœ‰æˆå‘˜å±æ€§sha1ï¼ˆåˆå§‹shaå€¼ï¼‰å’ŒoutFileï¼ˆæœ€ç»ˆè½¬ä¸º16è¿›åˆ¶çš„å­—ç¬¦ä¸²ï¼‰
+// æä¾›åŸºäºæ–‡ä»¶å†…å®¹ï¼ˆblobï¼‰å’Œæ–‡ä»¶åæˆ–å­—ç¬¦ä¸²ï¼ˆé’ˆå¯¹treeï¼‰çš„shaå€¼è®¡ç®—å’Œè¯»å–æ–¹æ³•ã€æä¾›å­—ç¬¦æ•°ç»„è½¬å­—ç¬¦ä¸²çš„æ–¹æ³•
 
     private byte[] sha1;
-    public Hash(String inFile,boolean isFile) throws Exception{ // ¹¹Ôì¸ÃÀàµÄ¶ÔÏóÊ±£¬»á¸ù¾İÊÇ·ñÊÇÎÄ¼şÀ´³õÊ¼»¯ÏàÓ¦µÄ¶ÔÏóË½ÓĞ³ÉÔ±ÊôĞÔ
+    public Hash(String inFile,boolean isFile) throws Exception{ // æ„é€ è¯¥ç±»çš„å¯¹è±¡æ—¶ï¼Œä¼šæ ¹æ®æ˜¯å¦æ˜¯æ–‡ä»¶æ¥åˆå§‹åŒ–ç›¸åº”çš„å¯¹è±¡ç§æœ‰æˆå‘˜å±æ€§
         if(isFile){
             FileInputStream input = new FileInputStream(inFile);
-            this.sha1 = SHA1content(input); // ÀûÓÃÎÄ¼şÄÚÈİ¼ÆËãhashÖµ
+            this.sha1 = SHA1content(input); // åˆ©ç”¨æ–‡ä»¶å†…å®¹è®¡ç®—hashå€¼
         }
         else{
-            this.sha1 = SHA1name(inFile); // ÓÃÎÄ¼şÃû¼ÆËãhashÖµ
+            this.sha1 = SHA1name(inFile); // ç”¨æ–‡ä»¶åè®¡ç®—hashå€¼
         }
     }
 
-	public static byte[] SHA1content(InputStream is) throws Exception { // @1.¶ÔÒ»¸ö¾ßÌåÎÄ¼ş£¬Í¨¹ıÎÄ¼şÄÚÈİ¼ÆËãshaÖµµÄ·½·¨£¬¼´blob¶ÔÏóµÄkeyÖµ
-		byte[] buffer = new byte[1024]; // ²ÉÓÃÒ»¸ö×Ö½ÚÊı×é×ö»º³åÆ÷
-		MessageDigest complete = MessageDigest.getInstance("SHA-1"); // Ö¸¶¨SHA1Ëã·¨
+	public static byte[] SHA1content(InputStream is) throws Exception { // @1.å¯¹ä¸€ä¸ªå…·ä½“æ–‡ä»¶ï¼Œé€šè¿‡æ–‡ä»¶å†…å®¹è®¡ç®—shaå€¼çš„æ–¹æ³•ï¼Œå³blobå¯¹è±¡çš„keyå€¼
+		byte[] buffer = new byte[1024]; // é‡‡ç”¨ä¸€ä¸ªå­—èŠ‚æ•°ç»„åšç¼“å†²å™¨
+		MessageDigest complete = MessageDigest.getInstance("SHA-1"); // æŒ‡å®šSHA1ç®—æ³•
 		int numRead = 0;
 		do {
-			numRead = is.read(buffer); // ´ÓÊäÈëÁ÷ÖĞ¶Ábuffer.length¸ö×Ö½Ú¸øbuffer£¬²¢ÇÒ·µ»ØÊµ¼Ê¶ÁÈ¡µÄ×Ö½ÚÊı¸øÕûĞÍ±äÁ¿numRead
+			numRead = is.read(buffer); // ä»è¾“å…¥æµä¸­è¯»buffer.lengthä¸ªå­—èŠ‚ç»™bufferï¼Œå¹¶ä¸”è¿”å›å®é™…è¯»å–çš„å­—èŠ‚æ•°ç»™æ•´å‹å˜é‡numRead
 			if (numRead > 0) {
 				complete.update(buffer, 0, numRead);
 			}
-		} while (numRead != -1); // numRead = -1´ú±íÎÄ¼ş¶ÁÈ¡Íê±Ï¡£ĞèÒª¹Ø±ÕÊäÈëÁ÷£¬²¢ÇÒ·µ»ØÏûÏ¢ÕªÒª×Ö½ÚÊı×é¡£
+		} while (numRead != -1); // numRead = -1ä»£è¡¨æ–‡ä»¶è¯»å–å®Œæ¯•ã€‚éœ€è¦å…³é—­è¾“å…¥æµï¼Œå¹¶ä¸”è¿”å›æ¶ˆæ¯æ‘˜è¦å­—èŠ‚æ•°ç»„ã€‚
 		is.close();
 		return complete.digest();
 	}
 	
-    public static byte[] SHA1name(String s) throws Exception{ // @2.¶ÔÒ»¸öÎÄ¼ş»òÎÄ¼ş¼ĞÃû¼ÆËãshaÖµµÄ·½·¨
+    public static byte[] SHA1name(String s) throws Exception{ // @2.å¯¹ä¸€ä¸ªæ–‡ä»¶æˆ–æ–‡ä»¶å¤¹åè®¡ç®—shaå€¼çš„æ–¹æ³•
         MessageDigest complete = MessageDigest.getInstance("SHA-1");
         int numRead = 0;
         complete.update(s.getBytes());
         return complete.digest();
     }
 	
-	public String convertToHexString(byte data[]) { // @3.ÓÉÓÚMessageDigest¶ÔÏóµÄdigest()·½·¨·µ»ØµÄÊÇ×Ö·ûÊı×é£¬ÒªµÃµ½Ê®Áù½øÖÆµÄshaÖµ»¹ĞèÒª×ªÎª×Ö·û´®
-								//£¨treeµÄvalue°üÀ¨ÁËÎÄ¼şÃû£¨×Ö·û´®£©¡¢×ÓÎÄ¼ş¼ĞÃû£¨×Ö·û´®£©¡¢×ÓÎÄ¼ş¼ĞµÄtreekey£¨×Ö·û´®£©¡¢×ÓÎÄ¼şµÄblobkey£¨×Ö·û´®£©
-		StringBuffer strBuffer = new StringBuffer(); // ÓÃStringBufferÈ¥½¨Á¢¿É±ä×Ö·û´®¶ÔÏó
+	public String convertToHexString(byte data[]) { // @3.ç”±äºMessageDigestå¯¹è±¡çš„digest()æ–¹æ³•è¿”å›çš„æ˜¯å­—ç¬¦æ•°ç»„ï¼Œè¦å¾—åˆ°åå…­è¿›åˆ¶çš„shaå€¼è¿˜éœ€è¦è½¬ä¸ºå­—ç¬¦ä¸²
+								//ï¼ˆtreeçš„valueåŒ…æ‹¬äº†æ–‡ä»¶åï¼ˆå­—ç¬¦ä¸²ï¼‰ã€å­æ–‡ä»¶å¤¹åï¼ˆå­—ç¬¦ä¸²ï¼‰ã€å­æ–‡ä»¶å¤¹çš„treekeyï¼ˆå­—ç¬¦ä¸²ï¼‰ã€å­æ–‡ä»¶çš„blobkeyï¼ˆå­—ç¬¦ä¸²ï¼‰
+		StringBuffer strBuffer = new StringBuffer(); // ç”¨StringBufferå»å»ºç«‹å¯å˜å­—ç¬¦ä¸²å¯¹è±¡
 		for (int i = 0; i < data.length; i++) {
-			strBuffer.append(Integer.toHexString(0xff & data[i])); // ÓÃÊ®Áù½øÖÆÊıoxffÓëÄ³¸ö×Ö½ÚÖµ×ö°´Î»ÓëÔËËã£¬
-										// Ö»±£ÁôÁË32Î»µÄ×îºó8Î»£¬±£Ö¤¸ºÊı×ª»»³ÉÊ®Áù½øÖÆ²»»á³ö´í
+			strBuffer.append(Integer.toHexString(0xff & data[i])); // ç”¨åå…­è¿›åˆ¶æ•°oxffä¸æŸä¸ªå­—èŠ‚å€¼åšæŒ‰ä½ä¸è¿ç®—ï¼Œ
+										// åªä¿ç•™äº†32ä½çš„æœ€å8ä½ï¼Œä¿è¯è´Ÿæ•°è½¬æ¢æˆåå…­è¿›åˆ¶ä¸ä¼šå‡ºé”™
 		}
 		return strBuffer.toString();
 	}
