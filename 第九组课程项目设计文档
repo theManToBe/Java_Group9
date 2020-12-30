@@ -98,3 +98,14 @@ c当前处于的分支
 实现想法：
 Scanner接收用户指令
 通过main函数命令行参数String[] args接收用户指令
+
+实现的命令：
+
+git branch：获得所有的branch，显示每一个branch的key
+          实现思路：创建一个文件夹存储每一个分支branch的id，遍历读取文件中所有文件的文件名。
+   
+   git checkout “branchname” 切换到名为”branchname”分支
+
+Git log: 获得所有的提交记录，显示每一次commit的key 
+  实现思路：创建一个文件，每次提交将生成的commit的key写入文件中，执行git log操作，依次读出该文件中记录的commit的key以及找到对应的commit文件读出其value
+
