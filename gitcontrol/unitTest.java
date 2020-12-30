@@ -85,14 +85,14 @@ public class unitTest {
     }
 
     public static void testCommit(String path) throws Exception{
-        Commit commit1 = new Commit("chenpeng","chenpeng","first commit");
+        Commit commit1 = new Commit("hezheng","hezheng","first commit");
         System.out.println(commit1.getContent());
         commit1.write();
 
         PrintWriter printWriter = new PrintWriter(path+"/a.txt"); // don't forget /
         printWriter.print("hello world");
         printWriter.close();
-        Commit commit2 = new Commit("chenpeng","chenpeng","second commit");
+        Commit commit2 = new Commit("hezheng","hezheng","second commit");
         System.out.println(commit2.getContent());
         commit2.write();
 
