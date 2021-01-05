@@ -1,4 +1,4 @@
-pimport java.io.*;
+import java.io.*;
 
 public class Blob extends KeyValueObject {
     public Blob(File file) throws Exception {
