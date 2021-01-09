@@ -101,11 +101,24 @@ Scanner接收用户指令
 
 实现的命令：
 
-git branch：获得所有的branch，显示每一个branch的key
+1.git init:初始化仓库。
+     在当前目录中创建新的git版本控制系统。初始化仓库将在当前工作目录新建一个文件夹，文件夹内逐级新建用于储存commit、branch、head内容的文件。Init将自动生成一个名为master的主分支，生成一个head指向该分支。
+2.git add:添加文件至暂存区（仓库）
+获得想要add的文件路径或文件名，判断其是否已经存在（比较key值），如果不存在则在目录下新建一个文件，将其转换为keyvalue存储形式保存至暂存区。
+3.git commit:提交文件
+   将暂存区文件提交至指定的branch中。
+4.git branch：获得所有的branch，显示每一个branch的key
           实现思路：创建一个文件夹存储每一个分支branch的id，遍历读取文件中所有文件的文件名。
-   
-   git checkout “branchname” 切换到名为”branchname”分支
+  ——git checkout “branchname” 切换到名为”branchname”分支
 
-Git log: 获得所有的提交记录，显示每一次commit的key 
+
+待实现命令：
+5.git log: 获得所有的提交记录，显示每一次commit的key 
   实现思路：创建一个文件，每次提交将生成的commit的key写入文件中，执行git log操作，依次读出该文件中记录的commit的key以及找到对应的commit文件读出其value
+6.git rm: 删除分支文件
+     从暂存区（仓库）文件夹目录中删除指定文件file。
+     如果文件不存在则返回。
+     如果文件存在，则删除该文件，并生成一个commit文件记录删除操作。
+
+7.git reset:回退版本，可以指定退回某一次提交的版本
 
