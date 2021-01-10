@@ -116,13 +116,10 @@ c当前处于的分支
   ——git checkout “branchname” 切换到名为”branchname”分支
 
 
-2)待实现命令：
+
 -git log: 获得所有的提交记录，显示每一次commit的key 
 实现思路：创建一个文件，每次提交将生成的commit的key写入文件中，执行git log操作，依次读出该文件中记录的commit的key以及找到对应的commit文件读出其value
 
--git rm: 删除分支文件
-从暂存区（仓库）文件夹目录中删除指定文件file。
- 	如果文件不存在则返回。
- 	如果文件存在，则删除该文件，并生成一个commit文件记录删除操作。
+
 
 git reset:回退版本，可以指定退回某一次提交的版本
